@@ -9,18 +9,25 @@ export class Search extends Component {
     static propTypes = {
         searchUsers: PropTypes.func.isRequired,
         clearUsers: PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired
+        showClear: PropTypes.bool.isRequired,
+        setAlert: PropTypes.func.isRequired
       }
     onChange=(e)=>{        
             this.setState({[e.target.name]: e.target.value})            
         }
-            
+         
+    
     onSubmit=(e)=>{
         e.preventDefault();
-        this.props.searchUsers(this.state.searchText); // SearchUsers is a props which we are going to feed to App component
-        this.setState({ searchText : ""});
-        console.log('----------------')
-        console.log(this.state.searchText)
+        if(this.state.searchText === ''){
+            this.props.setAlert('Please type something', 'light');
+        }
+        else{
+            this.props.searchUsers(this.state.searchText); // SearchUsers is a props which we are going to feed to App component
+            this.setState({ searchText : ""});
+        }
+        
+        
     }
    
     render(){
@@ -30,7 +37,7 @@ export class Search extends Component {
                 <input type ="text" 
                    name="searchText" 
                    placeholder= "Type to search here"
-                   value={this.state.text}
+                   value={this.state.searchText}
                    onChange={this.onChange}>
                 </input>
                 <input type="submit"

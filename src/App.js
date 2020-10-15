@@ -8,7 +8,8 @@ import axios from 'axios';
 class App extends Component{
   state={
     users: [],
-    loading: false
+    loading: false,
+    alert: null
   }
   
  /*  async componentDidMount(){       
@@ -37,6 +38,10 @@ class App extends Component{
         this.setState({users:[], loading: false})
   }
   
+  //setting alert 
+  setAlertMethod=(msg, type)=>{
+    this.setState({alert: {msg: msg, type:type}}) // alert is an object having two attributes of type msg , type
+  }
   
 
   render(){
@@ -48,6 +53,7 @@ class App extends Component{
               <Search searchUsers = {this.searchUserMethod} 
                   clearUsers = {this.clearUserMethod}
                   showClear = {this.state.users.length > 0 ? true : false}
+                  setAlert = {this.setAlertMethod}
               />
           <Users users={this.state.users} loading={this.state.loading}/>
           </div>        
