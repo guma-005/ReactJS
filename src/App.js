@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './components/Layout/Navbar'
+import Alert from './components/Layout/Alert'
 import Users from './user/Users'
 import Search from './user/Search'
 import './App.css';
@@ -41,15 +42,17 @@ class App extends Component{
   //setting alert 
   setAlertMethod=(msg, type)=>{
     this.setState({alert: {msg: msg, type:type}}) // alert is an object having two attributes of type msg , type
+    setTimeout(()=>this.setState({alert:null}), 5000) // this wil remove the alert message after 5 sec
+  
   }
   
 
   render(){
-
     return(      
         <div className='App'>
           <Navbar />         
           <div className='container'>
+              <Alert alert={this.state.alert}/>
               <Search searchUsers = {this.searchUserMethod} 
                   clearUsers = {this.clearUserMethod}
                   showClear = {this.state.users.length > 0 ? true : false}
