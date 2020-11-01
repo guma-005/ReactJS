@@ -1,5 +1,6 @@
 import React from  'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 
 const UserItem= (props)=> {
@@ -14,13 +15,11 @@ const UserItem= (props)=> {
                     style={{width: '60px'}}                
                 />
                 <h3>{login}</h3>
-               <div> <a href={html_url}
-                 className='btn btn-dark'>more</a></div>
+               <div> <Link to={`/user/${login}`}
+                 className='btn btn-dark'>more</Link></div>
             </div>
         );
-
 };
-
 UserItem.propTypes ={
     user: PropTypes.object.isRequired 
 };
